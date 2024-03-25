@@ -15,7 +15,7 @@ combined_vowel_map = {
     ('ㅜ', 'ㅔ'): 'ㅞ'
 }
 
-#text: 자음 or 모음 값, sta: 초성(0), 중성(1), 종성(2), 단어(3), 숫자(4) 구분
+#text: 자음,모음,단어,숫자 값, sta: 초성(0), 중성(1), 종성(2), 단어(3), 숫자(4) 구분
 def make_text(text, sta):
     global temp_store, temp, last_chosung_index, last_jungsung_index, last_jungsung_text
     imp_text='' #임시 리턴 텍스트

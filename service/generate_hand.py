@@ -37,6 +37,7 @@ def generate_frames(model):
             print("Frame read error!!!")
             continue
 
+        frame = cv2.resize(frame, (1300, 800))
         H, W, _ = frame.shape
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = hands.process(frame_rgb)
