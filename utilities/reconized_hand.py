@@ -10,7 +10,7 @@ def store_recognition_data(character, coordinates):
     else:
         variable.recognition_data[character] = [1, coordinates]
 
-    print(f"Updated recognition data: {variable.recognition_data}")
+    print(f"data: {character}, {variable.recognition_data[character][1]}")
 
     #10번 인식되면 확정 처리
     if variable.recognition_data[character][0] >= 10:

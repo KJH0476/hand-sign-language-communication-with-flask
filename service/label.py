@@ -45,17 +45,14 @@ class Label:
             '28_Left': 'ㅚ', '28_Right': 'ㅚ',
             '29_Left': 'ㅟ', '29_Right': 'ㅟ',
             '30_Left': 'ㅢ', '30_Right': 'ㅢ',
-            '31_Left': '0', '31_Right': '0',
-            '32_Left': '1', '32_Right': '1',
-            '33_Left': '2', '33_Right': '2',
-            '34_Left': '3', '34_Right': '3',
-            '35_Left': '4', '35_Right': '4',
-            '36_Left': '5', '36_Right': '5',
-            '37_Left': '6', '37_Right': '6',
-            '38_Left': '7', '38_Right': '7',
-            '39_Left': '8', '39_Right': '8',
-            '40_Left': '9', '40_Right': '9'
-            # ,'41_Left': 'unknown', '41_Right': 'unknown'
+            '31_Left': '3', '31_Right': '3',
+            '32_Left': '4', '32_Right': '4',
+            '33_Left': '5', '33_Right': '5',
+            '34_Left': '6', '34_Right': '6',
+            '35_Left': '7', '35_Right': '7',
+            '36_Left': '8', '36_Right': '8',
+            '37_Left': '9', '37_Right': '9',
+            '38_Left': 'unknown', '38_Right': 'unknown'
         }
 
         self.labels_dict = labels_dict
