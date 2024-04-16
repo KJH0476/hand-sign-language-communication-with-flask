@@ -43,8 +43,8 @@ def confirm_recognition_data(character, sta):
     print(text, sta, make_hangul.temp_store)
     variable.socketio.emit('flash_border', {'status': 'confirmed', 'text': text})
 
-    #전송 동작을 하면 지피티에게 완성된 문장 요청 보냄(현재 전송 동작 없으므로 'ㅎ'으로 대체)
-    if character=='ㅎ':
+    #전송 동작을 하면 지피티에게 완성된 문장 요청 보냄
+    if character=='전송':
         gpt_prompt = ''.join(make_hangul.temp_store)
         make_hangul.temp_store.clear()
         gpt_answer = chatgpt_make_answer.request_gpt_answer(gpt_prompt)

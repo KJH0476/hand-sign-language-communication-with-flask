@@ -52,7 +52,7 @@ class Label:
             '35_Left': '7', '35_Right': '7',
             '36_Left': '8', '36_Right': '8',
             '37_Left': '9', '37_Right': '9',
-            '38_Left': 'unknown', '38_Right': 'unknown'
+            '38_Left': '전송', '38_Right': '전송'
         }
 
         self.labels_dict = labels_dict
