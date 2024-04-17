@@ -14,6 +14,7 @@ def text_show():
     result = separate_text(input_word)
     print(result)
 
-    #variable.socketio.emit('answer', result)
+    #입력한 텍스트 화면에서 확인할 수 있도록 소켓 전송
+    variable.socketio.emit('player_text', {'text': input_word})
 
     return jsonify({'status': 'success'}), 200

@@ -50,9 +50,12 @@ def confirm_recognition_data(character, sta):
         gpt_answer = chatgpt_make_answer.request_gpt_answer(gpt_prompt)
         print(gpt_answer)
 
+        #지피티의 응답을 사용자가 텍스트로 볼 수 있도록 소켓 전송
+        variable.socketio.emit('player_text', {'text': gpt_answer})
+
         #받응 응답을 분리
         separate_text = separate_hangul.separate_text(gpt_answer)
         print(separate_text)
 
         #분리된 텍스트를 언리얼 클라이언트에게 소켓 전송
-        #socketio.emit('answer', separate_text)
+        variable.socketio.emit('answer', separate_text)
