@@ -62,7 +62,7 @@ def make_text(text, sta):
         print(chr(temp))
     elif sta==2:
         jongsung_index = L.final_consonant_map.get(text, 0)
-        if jongsung_index!=0:
+        if jongsung_index!=0 and len(temp_store)>0:
             temp_store[-1] = chr(ord(temp_store[-1]) + jongsung_index)
             imp_text = temp_store[-1]  # '아'로 초기화 전에 저장
         last_chosung_index = None; last_jungsung_index = None
