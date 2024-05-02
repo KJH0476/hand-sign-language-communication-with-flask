@@ -14,11 +14,16 @@ def draw_box(frame):
     start_y = variable.square_center_y - square_length_y // 2
     end_x = start_x + square_length_x
     end_y = start_y + square_length_y
+
     square_color = (0, 0, 0)
     square_thickness = 1
+    cv2.rectangle(frame, (start_x, start_y), (end_x, end_y), square_color, square_thickness)
 
-    frame = cv2.rectangle(frame, (start_x, start_y), (end_x, end_y), square_color, square_thickness)
+    mid_x = start_x + square_length_x // 2
+    cv2.line(frame, (mid_x, start_y), (mid_x, variable.square_center_y), square_color, square_thickness)
 
+    mid_y = start_y + square_length_y // 2
+    cv2.line(frame, (start_x, mid_y), (end_x, mid_y), square_color, square_thickness)
 
 def draw_hangul_text(image, text, position, font_path, font_size, color):
     image_pil = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
