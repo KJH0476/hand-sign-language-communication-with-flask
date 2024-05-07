@@ -2,25 +2,26 @@ import variable
 from service import make_hangul, chatgpt_make_answer, separate_hangul
 
 store = []
+recognition_data = {}
 
 def store_recognition_data(character, coordinates):
-    if character in variable.recognition_data:
-        variable.recognition_data[character][0] += 1
-        variable.recognition_data[character][1] = coordinates
+    if character in recognition_data:
+        recognition_data[character][0] += 1
+        recognition_data[character][1] = coordinates
     else:
-        variable.recognition_data[character] = [1, coordinates]
+        recognition_data[character] = [1, coordinates]
 
-    print(f"data: {character}, {variable.recognition_data[character][1]}")
+    print(f"data: {character}, {recognition_data[character][1]}")
 
     #10번 인식되면 확정 처리
-    if variable.recognition_data[character][0] >= 10:
+    if recognition_data[character][0] >= 10:
         #초성
-        if (variable.recognition_data[character][1][0] <= variable.square_center_x and variable.recognition_data[character][1][1] <= variable.square_center_y)\
-                or (variable.square_center_x-130 <= variable.recognition_data[character][1][0] <= variable.square_center_x and variable.recognition_data[character][1][1] <= variable.square_center_y): sta = 0
+        if (recognition_data[character][1][0] <= variable.square_center_x and recognition_data[character][1][1] <= variable.square_center_y)\
+                or (variable.square_center_x-130 <= recognition_data[character][1][0] <= variable.square_center_x and recognition_data[character][1][1] <= variable.square_center_y): sta = 0
         #중성
-        elif variable.recognition_data[character][1][0] > variable.square_center_x and variable.recognition_data[character][1][1] <=variable.square_center_y: sta = 1
+        elif recognition_data[character][1][0] > variable.square_center_x and recognition_data[character][1][1] <=variable.square_center_y: sta = 1
         #종성
-        elif variable.recognition_data[character][1][1] > variable.square_center_y: sta = 2
+        elif recognition_data[character][1][1] > variable.square_center_y: sta = 2
         # 단어
         else: sta = 3
 
@@ -31,7 +32,7 @@ def store_recognition_data(character, coordinates):
             sta = 4
 
         #딕셔너리 초기화
-        variable.recognition_data.clear()
+        recognition_data.clear()
         confirm_recognition_data(character, sta)
 
 def confirm_recognition_data(character, sta):
@@ -59,3 +60,5 @@ def confirm_recognition_data(character, sta):
 
         #분리된 텍스트를 언리얼 클라이언트에게 소켓 전송
         variable.socketio.emit('answer', separate_text)
+
+        store.clear()
