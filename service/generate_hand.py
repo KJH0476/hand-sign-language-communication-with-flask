@@ -94,7 +94,7 @@ def generate_frames(model):
                         reconized_hand.store_recognition_data(recognized_text, (center_x, center_y))
                     #단어일 경우 범위 밖에서도 인식
                     else:
-                        if len(variable.recognition_data) > 1: reconized_hand.store_recognition_data(recognized_text, (-1,-1));
+                        if len(recognized_text) > 1: reconized_hand.store_recognition_data(recognized_text, (-1,-1));
                     last_recognition_update = time.time()
 
         ret, buffer = cv2.imencode('.jpg', frame)
