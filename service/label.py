@@ -1,5 +1,6 @@
 class Label:
     labels_dict = None
+    labels_dict_digut = None
 
     # 초성, 중성, 종성, 단어, 숫자 리스트
     CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
@@ -54,9 +55,22 @@ class Label:
             '37_Left': '9', '37_Right': '9',
             '38_Left': '전송', '38_Right': '전송'
         }
-
+        
+        # 모델별 라벨
+        labels_dict_digut = {
+        '0_Left': 'ㄷ', '1_Left': 'ㄹ', '2_Left': 'ㅌ', 
+        '0_Right': 'ㄷ', '1_Right': 'ㄹ', '2_Right': 'ㅌ'
+        }
+        labels_dict_siot = {'0_Left': 'ㅅ', '1_Left': 'ㅠ', '2_Left': 'ㅈ','3_Left': 'ㅊ','4_Left': 'ㅋ', 
+               '0_Right': 'ㅅ', '1_Right': 'ㅠ', '2_Right': 'ㅈ', '3_Right': 'ㅊ', '4_Right': 'ㅋ'}
+        labels_dict_ye = {'0_Left': 'ㅓ', '1_Left': 'ㅕ', '2_Left': 'ㅔ','3_Left': 'ㅖ', 
+               '0_Right': 'ㅓ', '1_Right': 'ㅕ', '2_Right': 'ㅔ', '3_Right': 'ㅖ'}
+        
+        # 모델 라벨 초기화
         self.labels_dict = labels_dict
-
+        self.labels_dict_digut = labels_dict_digut
+        self.labels_dict_siot = labels_dict_siot
+        self.labels_dict_ye = labels_dict_ye
         # 초성 맵 초기화
         consonants = ["ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
         self.consonant_map = {consonant: i for i, consonant in enumerate(consonants)}
