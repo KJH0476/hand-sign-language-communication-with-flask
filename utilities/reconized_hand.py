@@ -42,7 +42,7 @@ def confirm_recognition_data(character, sta):
     print(store)
     text = make_hangul.make_text(character, sta)
     print(text, sta, make_hangul.temp_store)
-    variable.socketio.emit('flash_border', {'status': 'confirmed', 'text': text})
+    variable.socketio.emit('flash_border', {'status': 'confirmed', 'text': text}, namespace='/web')
 
     #전송 동작을 하면 지피티에게 완성된 문장 요청 보냄
     if character=='전송':
@@ -52,13 +52,13 @@ def confirm_recognition_data(character, sta):
         print(gpt_answer)
 
         #지피티의 응답을 사용자가 텍스트로 볼 수 있도록 소켓 전송
-        variable.socketio.emit('player_text', {'text': gpt_answer})
+        variable.socketio.emit('player_text', {'text': gpt_answer}, namespace='/web')
 
         #받응 응답을 분리
         separate_text = separate_hangul.separate_text(gpt_answer)
         print(separate_text)
 
         #분리된 텍스트를 언리얼 클라이언트에게 소켓 전송
-        variable.socketio.emit('answer', separate_text)
+        variable.socketio.emit('answer', separate_text, namespace='/unreal')
 
         store.clear()

@@ -10,12 +10,15 @@ def text_show():
     input_word = data['text']
 
     result = separate_text(input_word)
-    print(result)
+
+    # 디버깅을 위해 추가
+    print("Emitting answer event with result:", result)
+    print("Emitting player_text event with text:", input_word)
 
     # 입력 텍스트 분리 후 언리얼 클라이언트에게 소켓 전송
-    #variable.socketio.emit('answer', result)
+    variable.socketio.emit('answer', result, namespace='/unreal')
 
     # 입력한 텍스트 화면에서 확인할 수 있도록 소켓 전송
-    variable.socketio.emit('player_text', {'text': input_word})
+    variable.socketio.emit('player_text', {'text': input_word}, namespace='/web')
 
     return jsonify({'status': 'success'}), 200
