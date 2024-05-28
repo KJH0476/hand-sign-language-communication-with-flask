@@ -7,6 +7,7 @@ temp = 0
 last_chosung_index = None
 last_jungsung_index = None
 last_jungsung_text = None
+last_jongsung_index = None
 
 combined_vowel_map = {
     ('ㅗ', 'ㅏ'): 'ㅘ',
@@ -17,7 +18,7 @@ combined_vowel_map = {
 
 #text: 자음,모음,단어,숫자 값, sta: 초성(0), 중성(1), 종성(2), 단어(3), 숫자(4) 구분
 def make_text(text, sta):
-    global temp_store, temp, last_chosung_index, last_jungsung_index, last_jungsung_text
+    global temp_store, temp, last_chosung_index, last_jungsung_index, last_jungsung_text, last_jongsung_index
     imp_text='' #임시 리턴 텍스트
 
     # 초성, 중성, 종성 인덱스 찾기
@@ -34,6 +35,7 @@ def make_text(text, sta):
 
         print(chr(temp))
         last_jungsung_index = None
+        last_jongsung_index = None
         imp_text = chr(temp)  # '아'로 초기화 전에 저장
     elif sta==1:
         jungsung_index = L.vowel_map.get(text, 0)
@@ -55,6 +57,7 @@ def make_text(text, sta):
                 last_chosung_index = None
                 return imp_text
             last_chosung_index = None
+        last_jongsung_index = None
         temp += (jungsung_index * 28)
         temp_store.append(chr(temp))
         imp_text = chr(temp)
@@ -63,14 +66,21 @@ def make_text(text, sta):
     elif sta==2:
         jongsung_index = L.final_consonant_map.get(text, 0)
         if jongsung_index!=0 and len(temp_store)>0:
-            temp_store[-1] = chr(ord(temp_store[-1]) + jongsung_index)
-            imp_text = temp_store[-1]  # '아'로 초기화 전에 저장
+            # 종성 쌍자음 처리
+            if last_jongsung_index != None:
+                temp_store[-1] = chr(ord(temp_store[-1]) - jongsung_index)
+                temp_store[-1] = chr(ord(temp_store[-1]) + (jongsung_index+1))
+                last_jongsung_index = None
+            else :
+                temp_store[-1] = chr(ord(temp_store[-1]) + jongsung_index)
+                imp_text = temp_store[-1]  # '아'로 초기화 전에 저장
+                last_jongsung_index = jongsung_index
         last_chosung_index = None; last_jungsung_index = None
     elif sta==3 or sta==4:
         temp_store.append(text)
         imp_text = chr(temp)  # '아'로 초기화 전에 저장
         temp = 50500 #temp 초기화
-        last_chosung_index = None; last_jungsung_index = None
+        last_chosung_index = None; last_jungsung_index = None; last_jongsung_index = None
     return imp_text
 
 def clear_hangul_store():
